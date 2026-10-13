@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "784303313940",
+    "project_id": "flyfinder-938ca",
+    "storage_bucket": "flyfinder-938ca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784303313940:android:f2e1bb4c776965e06cc301",
+        "android_client_info": {
+          "package_name": "com.example.flyfinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARQ47XcBlvO1k4iKWN4jUBFnWT3UbnILY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
