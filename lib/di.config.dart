@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 
+import 'package:flyfinder/app/guards/auth_guard.dart' as _i308;
 import 'package:flyfinder/app/router/app_router.dart' as _i246;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -21,7 +22,10 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.singleton<_i246.AppRouter>(() => _i246.AppRouter());
+    gh.singleton<_i308.AuthGuard>(() => _i308.AuthGuard());
+    gh.singleton<_i246.AppRouter>(
+      () => _i246.AppRouter(authGuard: gh<_i308.AuthGuard>()),
+    );
     return this;
   }
 }
