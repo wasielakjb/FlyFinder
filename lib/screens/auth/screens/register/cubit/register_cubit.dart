@@ -1,14 +1,23 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flyfinder/extensions/reactive_form_extension.dart';
+import 'package:flyfinder/features/auth/auth_repository_impl.dart';
 import 'package:flyfinder/screens/auth/screens/register/form_builders/register_fg_factory.dart';
+import 'package:flyfinder/screens/auth/screens/register/form_builders/register_form_keys.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 part 'register_state.dart';
 
+typedef _K = RegisterKeys;
+
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit() : super(RegisterState.inital()) {
+  RegisterCubit({
+    required this.repository,
+  }) : super(RegisterState.inital()) {
     init();
   }
+
+  final AuthRepository repository;
 
   FormGroup? _formGroup;
   FormGroup get formGroup => _formGroup ?? FormGroup({});
@@ -19,5 +28,21 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(state.copyWith(initialized: true));
   }
 
-  Future<void> submit() async {}
+  Future<void> submit() async {
+    formGroup.markAllAsTouched();
+    if (formGroup.invalid) return;
+    emit(state.copyWith(status: PendingRegisterStatus()));
+    try {
+      await repository.register(
+        email: formGroup.controlVal<String>(_K.email)!,
+        password: formGroup.controlVal<String>(_K.password)!,
+      );
+      formGroup
+        ..markAsPristine()
+        ..markAsUntouched();
+      emit(state.copyWith(status: SuccessRegisterStatus()));
+    } on Exception catch (err) {
+      emit(state.copyWith(status: ErrorRegisterStatus(exception: err)));
+    }
+  }
 }

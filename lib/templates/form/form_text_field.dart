@@ -52,7 +52,7 @@ class _FormTextFieldState<T> extends State<FormTextField<T>> {
               widget.textCapitalization ?? TextCapitalization.none,
           inputFormatters: widget.inputFormatters ?? [],
           maxLines: widget.maxLines ?? 1,
-          obscureText: widget.obscureText,
+          obscureText: widget.obscureText && _hidePassword,
           style: context.bodyLarge.copyWith(fontSize: 16),
           onTapOutside: (_) => FocusScope.of(context).unfocus(),
           decoration: InputDecoration(

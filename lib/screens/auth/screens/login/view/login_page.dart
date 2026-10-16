@@ -3,11 +3,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flyfinder/app/router/app_router.gr.dart';
+import 'package:flyfinder/di.dart';
 import 'package:flyfinder/extensions/color_scheme_getters_extension.dart';
 import 'package:flyfinder/extensions/text_style_getters_extension.dart';
 import 'package:flyfinder/screens/auth/screens/login/cubit/login_cubit.dart';
 import 'package:flyfinder/screens/auth/screens/login/form_builders/login_form_keys.dart';
 import 'package:flyfinder/templates/form/form_text_field.dart';
+import 'package:flyfinder/templates/layout/any_button_content.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -20,7 +22,7 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => LoginCubit(),
+      create: (_) => LoginCubit(repository: inject()),
       child: this,
     );
   }
@@ -37,7 +39,6 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
             child: Skeletonizer(
               enabled: !state.initialized,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   RichText(
                     textAlign: TextAlign.center,
@@ -84,8 +85,12 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
                           textAlign: TextAlign.end,
                         ),
                         FilledButton(
-                          onPressed: cubit.submit,
-                          child: const Text('Log in'),
+                          onPressed: state.pending ? null : cubit.submit,
+                          child: AnyButtonContent(
+                            text: 'Log in',
+                            fullWidth: true,
+                            pending: state.pending,
+                          ),
                         ),
                       ],
                     ),

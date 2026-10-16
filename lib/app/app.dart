@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flyfinder/app/router/app_router.dart';
 import 'package:flyfinder/app/theme/app_theme.dart';
 import 'package:flyfinder/di.dart';
+import 'package:flyfinder/features/auth/auth_repository_impl.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -17,6 +18,9 @@ class App extends StatelessWidget {
       darkTheme: AppTheme.dark,
       routerConfig: _router.config(
         navigatorObservers: () => [AutoRouteObserver()],
+        reevaluateListenable: ReevaluateListenable.stream(
+          inject<AuthRepository>().authStateChanges,
+        ),
       ),
     );
   }

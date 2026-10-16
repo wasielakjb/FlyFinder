@@ -2,11 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flyfinder/di.dart';
 import 'package:flyfinder/extensions/color_scheme_getters_extension.dart';
 import 'package:flyfinder/extensions/text_style_getters_extension.dart';
 import 'package:flyfinder/screens/auth/screens/register/cubit/register_cubit.dart';
 import 'package:flyfinder/screens/auth/screens/register/form_builders/register_form_keys.dart';
 import 'package:flyfinder/templates/form/form_text_field.dart';
+import 'package:flyfinder/templates/layout/any_button_content.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -19,7 +21,9 @@ class RegisterPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => RegisterCubit(),
+      create: (_) => RegisterCubit(
+        repository: inject(),
+      ),
       child: this,
     );
   }
@@ -82,8 +86,12 @@ class RegisterPage extends StatelessWidget implements AutoRouteWrapper {
                           obscureText: true,
                         ),
                         FilledButton(
-                          onPressed: cubit.submit,
-                          child: const Text('Sign up'),
+                          onPressed: state.pending ? null : cubit.submit,
+                          child: AnyButtonContent(
+                            text: 'Sign in',
+                            fullWidth: true,
+                            pending: state.pending,
+                          ),
                         ),
                       ],
                     ),
