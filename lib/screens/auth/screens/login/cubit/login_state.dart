@@ -49,12 +49,10 @@ class PendingLoginStatus extends LoginStatus {}
 class SuccessLoginStatus extends LoginStatus {}
 
 class ErrorLoginStatus extends LoginStatus {
-  const ErrorLoginStatus({
-    required this.exception,
-  });
+  const ErrorLoginStatus({required this.message});
 
-  final Exception exception;
+  final String? message;
 
   @override
-  List<Object?> get props => [exception];
+  List<Object?> get props => [message];
 }

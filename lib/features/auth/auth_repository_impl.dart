@@ -9,6 +9,8 @@ class AuthRepository {
 
   Stream<User?> get authStateChanges => firebaseAuth.authStateChanges();
 
+  bool isRegistrationPending = false;
+
   Future<void> login({required String email, required String password}) async {
     await firebaseAuth.signInWithEmailAndPassword(
       email: email,
@@ -24,6 +26,7 @@ class AuthRepository {
     required String email,
     required String password,
   }) async {
+    isRegistrationPending = true;
     await firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,

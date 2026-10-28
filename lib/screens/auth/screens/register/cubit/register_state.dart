@@ -49,10 +49,10 @@ class PendingRegisterStatus extends RegisterStatus {}
 class SuccessRegisterStatus extends RegisterStatus {}
 
 class ErrorRegisterStatus extends RegisterStatus {
-  const ErrorRegisterStatus({required this.exception});
+  const ErrorRegisterStatus({required this.message});
 
-  final Exception exception;
+  final String? message;
 
   @override
-  List<Object?> get props => [exception];
+  List<Object?> get props => [message];
 }

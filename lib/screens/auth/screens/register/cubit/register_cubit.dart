@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flyfinder/extensions/reactive_form_extension.dart';
 import 'package:flyfinder/features/auth/auth_repository_impl.dart';
@@ -41,8 +42,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         ..markAsPristine()
         ..markAsUntouched();
       emit(state.copyWith(status: SuccessRegisterStatus()));
-    } on Exception catch (err) {
-      emit(state.copyWith(status: ErrorRegisterStatus(exception: err)));
+    } on FirebaseAuthException catch (e) {
+      emit(state.copyWith(status: ErrorRegisterStatus(message: e.message)));
     }
   }
 }

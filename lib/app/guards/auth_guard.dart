@@ -14,10 +14,17 @@ class AuthGuard extends AutoRouteGuard {
     NavigationResolver resolver,
     StackRouter router,
   ) async {
-    if (!repository.isAuthenticated) {
-      await router.root.replaceAll([const AuthRoute()]);
+    if (repository.isRegistrationPending) {
+      resolver.next();
       return;
     }
-    resolver.next();
+
+    if (repository.isAuthenticated) {
+      resolver.next();
+      return;
+    }
+
+    resolver.next(false);
+    await router.replaceAll([const AuthRoute()]);
   }
 }

@@ -5,7 +5,7 @@ class AnyButtonContent extends StatelessWidget {
   const AnyButtonContent({
     this.text,
     this.pending = false,
-    this.fullWidth = false,
+    this.fullWidth = true,
     this.icon,
     this.iconRight = false,
     super.key,
