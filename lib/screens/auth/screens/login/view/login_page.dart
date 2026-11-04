@@ -118,7 +118,6 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
                             onPressed: state.pending ? null : cubit.submit,
                             child: AnyButtonContent(
                               text: 'Log in',
-                              fullWidth: true,
                               pending: state.pending,
                             ),
                           ),

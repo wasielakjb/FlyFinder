@@ -156,7 +156,6 @@ class RegisterPage extends StatelessWidget implements AutoRouteWrapper {
                             onPressed: state.pending ? null : cubit.submit,
                             child: AnyButtonContent(
                               text: 'Sign in',
-                              fullWidth: true,
                               pending: state.pending,
                             ),
                           ),

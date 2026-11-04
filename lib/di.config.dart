@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 
+import 'package:flyfinder/app/cubit/app_theme_cubit.dart' as _i849;
 import 'package:flyfinder/app/guards/auth_guard.dart' as _i308;
 import 'package:flyfinder/app/router/app_router.dart' as _i246;
 import 'package:flyfinder/features/auth/auth_repository_impl.dart' as _i1071;
@@ -23,6 +24,7 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.singleton<_i849.AppThemeCubit>(() => _i849.AppThemeCubit());
     gh.singleton<_i1071.AuthRepository>(() => _i1071.AuthRepository());
     gh.singleton<_i308.AuthGuard>(
       () => _i308.AuthGuard(repository: gh<_i1071.AuthRepository>()),
