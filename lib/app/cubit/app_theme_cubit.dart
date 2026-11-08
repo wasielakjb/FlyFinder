@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flyfinder/core/domain/model/json.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -9,14 +10,14 @@ class AppThemeCubit extends HydratedCubit<ThemeMode> {
   void update(ThemeMode theme) => emit(theme);
 
   @override
-  ThemeMode? fromJson(Map<String, dynamic> json) {
+  ThemeMode? fromJson(Json json) {
     return json['themeMode'] != null
         ? ThemeMode.values[json['themeMode'] as int]
         : null;
   }
 
   @override
-  Map<String, dynamic>? toJson(ThemeMode state) {
+  Json? toJson(ThemeMode state) {
     return {'theme': state.index};
   }
 }

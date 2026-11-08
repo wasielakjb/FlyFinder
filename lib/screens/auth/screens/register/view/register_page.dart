@@ -7,9 +7,10 @@ import 'package:flyfinder/di.dart';
 import 'package:flyfinder/extensions/color_scheme_getters_extension.dart';
 import 'package:flyfinder/extensions/text_style_getters_extension.dart';
 import 'package:flyfinder/features/auth/auth_repository_impl.dart';
+import 'package:flyfinder/screens/auth/screens/login/cubit/login_cubit.dart';
 import 'package:flyfinder/screens/auth/screens/register/cubit/register_cubit.dart';
 import 'package:flyfinder/screens/auth/screens/register/form_builders/register_form_keys.dart';
-import 'package:flyfinder/templates/form/form_text_field.dart';
+import 'package:flyfinder/templates/form/ui/widgets/form_text_field.dart';
 import 'package:flyfinder/templates/layout/any_button_content.dart';
 import 'package:flyfinder/templates/layout/dialog/models/response_dialog_type.dart';
 import 'package:flyfinder/templates/layout/dialog/response_dialog.dart';
@@ -35,26 +36,47 @@ class RegisterPage extends StatelessWidget implements AutoRouteWrapper {
   Future<void> _onErrorDialog(
     BuildContext context,
     RegisterState state,
-  ) async { 
-    await showDialog<void>(
+    VoidCallback onTryAgain,
+  ) async {
+    final result = await showDialog<bool>(
       context: context,
-      barrierDismissible: false,
-      builder: (_) => ResponseDialog(
+      builder: (context) => ResponseDialog(
         type: ResponseDialogType.Error,
-        title: 'Failed',
-        message: (state.status as ErrorRegisterStatus).message!,
-        content: [
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: context.error,
+        message: (state.status as ErrorLoginStatus).message!,
+        content: Row(
+          spacing: 20,
+          children: [
+            Expanded(
+              child: FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: context.surfaceContainer,
+                  foregroundColor: context.outline,
+                ),
+                onPressed: () => context.maybePop(false),
+                child: const AnyButtonContent(text: 'Cancel'),
+              ),
             ),
-            onPressed: context.maybePop,
-            child: const AnyButtonContent(text: 'Go Back'),
-          ),
-        ],
+            Expanded(
+              child: FilledButton(
+                style: FilledButton.styleFrom(backgroundColor: context.error),
+                onPressed: () => context.maybePop(true),
+                child: const AnyButtonContent(text: 'Try again'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
+    
+    if (!context.mounted) return;
+    if (result ?? false) {
+      onTryAgain();
+      return;
+    }
     FocusManager.instance.primaryFocus?.unfocus();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.maybePop();
+    });
   }
 
   Future<void> _onSucceedDialog(
@@ -66,21 +88,18 @@ class RegisterPage extends StatelessWidget implements AutoRouteWrapper {
       barrierDismissible: false,
       builder: (_) => ResponseDialog(
         type: ResponseDialogType.Success,
-        title: 'Successful!',
         message: 'Your account has been created successfully.',
-        content: [
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: Colors.green,
-            ),
-            onPressed: context.maybePop,
-            child: const AnyButtonContent(text: 'Continue'),
+        content: FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: Colors.green,
           ),
-        ],
+          onPressed: context.maybePop,
+          child: const AnyButtonContent(text: 'Confirm'),
+        ),
       ),
     );
-    inject<AuthRepository>().isRegistrationPending = false;
     if (!context.mounted) return;
+    inject<AuthRepository>().isRegistrationPending = false;
     await context.router.replaceAll([const HomeRoute()]);
   }
 
@@ -91,7 +110,8 @@ class RegisterPage extends StatelessWidget implements AutoRouteWrapper {
       listeners: [
         BlocListener<RegisterCubit, RegisterState>(
           listenWhen: (_, current) => current.status is ErrorRegisterStatus,
-          listener: _onErrorDialog,
+          listener: (context, state) =>
+              _onErrorDialog(context, state, cubit.submit),
         ),
         BlocListener<RegisterCubit, RegisterState>(
           listenWhen: (_, current) => current.status is SuccessRegisterStatus,
@@ -139,18 +159,21 @@ class RegisterPage extends StatelessWidget implements AutoRouteWrapper {
                             formControlName: _K.email,
                             placeholder: 'Email',
                             keyboardType: TextInputType.emailAddress,
+                            wrapToSliver: false,
                           ),
                           FormTextField<String>(
                             formControlName: _K.password,
                             placeholder: 'Password',
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
+                            wrapToSliver: false,
                           ),
                           FormTextField<String>(
                             formControlName: _K.confirmPassword,
                             placeholder: 'Confirm password',
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
+                            wrapToSliver: false,
                           ),
                           FilledButton(
                             onPressed: state.pending ? null : cubit.submit,

@@ -8,7 +8,7 @@ import 'package:flyfinder/extensions/color_scheme_getters_extension.dart';
 import 'package:flyfinder/extensions/text_style_getters_extension.dart';
 import 'package:flyfinder/screens/auth/screens/login/cubit/login_cubit.dart';
 import 'package:flyfinder/screens/auth/screens/login/form_builders/login_form_keys.dart';
-import 'package:flyfinder/templates/form/form_text_field.dart';
+import 'package:flyfinder/templates/form/ui/widgets/form_text_field.dart';
 import 'package:flyfinder/templates/layout/any_button_content.dart';
 import 'package:flyfinder/templates/layout/dialog/models/response_dialog_type.dart';
 import 'package:flyfinder/templates/layout/dialog/response_dialog.dart';
@@ -32,26 +32,47 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
   Future<void> _onErrorDialog(
     BuildContext context,
     LoginState state,
+    VoidCallback onTryAgain,
   ) async {
-    await showDialog<void>(
+    final result = await showDialog<bool>(
       context: context,
-      barrierDismissible: false,
-      builder: (_) => ResponseDialog(
+      builder: (context) => ResponseDialog(
         type: ResponseDialogType.Error,
-        title: 'Failed',
         message: (state.status as ErrorLoginStatus).message!,
-        content: [
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: context.error,
+        content: Row(
+          spacing: 20,
+          children: [
+            Expanded(
+              child: FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: context.surfaceContainer,
+                  foregroundColor: context.outline,
+                ),
+                onPressed: () => context.maybePop(false),
+                child: const AnyButtonContent(text: 'Cancel'),
+              ),
             ),
-            onPressed: context.maybePop,
-            child: const AnyButtonContent(text: 'Go Back'),
-          ),
-        ],
+            Expanded(
+              child: FilledButton(
+                style: FilledButton.styleFrom(backgroundColor: context.error),
+                onPressed: () => context.maybePop(true),
+                child: const AnyButtonContent(text: 'Try again'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
+    
+    if (!context.mounted) return;
+    if (result ?? false) {
+      onTryAgain();
+      return;
+    }
     FocusManager.instance.primaryFocus?.unfocus();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.maybePop();
+    });
   }
 
   @override
@@ -59,7 +80,8 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
     final cubit = context.read<LoginCubit>();
     return BlocListener<LoginCubit, LoginState>(
       listenWhen: (previous, current) => current.status is ErrorLoginStatus,
-      listener: _onErrorDialog,
+      listener: (context, state) =>
+          _onErrorDialog(context, state, cubit.submit),
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) => Scaffold(
           resizeToAvoidBottomInset: false,
@@ -100,12 +122,14 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
                             formControlName: _K.email,
                             placeholder: 'Email',
                             keyboardType: TextInputType.emailAddress,
+                            wrapToSliver: false,
                           ),
                           FormTextField<String>(
                             formControlName: _K.password,
                             placeholder: 'Password',
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
+                            wrapToSliver: false,
                           ),
                           Text(
                             'Forgot password?',

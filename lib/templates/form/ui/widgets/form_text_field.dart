@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flyfinder/extensions/reactive_form_extension.dart';
 import 'package:flyfinder/extensions/text_style_getters_extension.dart';
+import 'package:flyfinder/templates/form/models/suffix_builder_callback.dart';
 import 'package:flyfinder/templates/form/models/validation_msg_map.dart';
 import 'package:flyfinder/templates/layout/sliver_wrapper.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -17,7 +18,8 @@ class FormTextField<T> extends StatefulWidget {
     this.inputFormatters,
     this.maxLines,
     this.obscureText = false,
-    this.wrapToSliver = false,
+    this.suffixBuilder,
+    this.wrapToSliver = true,
   }) : super(key: ValueKey(formControlName));
 
   final String formControlName;
@@ -28,6 +30,7 @@ class FormTextField<T> extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLines;
   final bool obscureText;
+  final SuffixBuilderCallback<T>? suffixBuilder;
   final bool wrapToSliver;
 
   @override
@@ -61,6 +64,10 @@ class _FormTextFieldState<T> extends State<FormTextField<T>> {
             suffixIcon: ReactiveValueListenableBuilder<T>(
               formControlName: widget.formControlName,
               builder: (context, control, child) {
+                if (widget.suffixBuilder != null) {
+                  return widget.suffixBuilder!.call(context, control);
+                }
+
                 final hasValue = control.value is String
                     ? (control.value! as String).isNotEmpty
                     : control.value != null;

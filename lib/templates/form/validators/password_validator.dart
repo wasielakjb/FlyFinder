@@ -1,10 +1,11 @@
+import 'package:flyfinder/core/domain/model/json.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class PasswordValidator extends Validator<String> {
   const PasswordValidator() : super();
 
   @override
-  Map<String, dynamic>? validate(AbstractControl<String> control) {
+  Json? validate(AbstractControl<String> control) {
     if (control.value?.isEmpty ?? true) {
       return null;
     }

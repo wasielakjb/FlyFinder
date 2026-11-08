@@ -24,6 +24,14 @@ abstract final class AppTheme {
       prefixIconColor: lightColorScheme.outlineVariant,
       suffixIconColor: lightColorScheme.outlineVariant,
     ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(8),
+        ),
+      ),
+    ),
   );
 
   static final dark = ThemeData(

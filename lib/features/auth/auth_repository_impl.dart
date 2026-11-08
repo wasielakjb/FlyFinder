@@ -9,6 +9,8 @@ class AuthRepository {
 
   Stream<User?> get authStateChanges => firebaseAuth.authStateChanges();
 
+  String? get userId => firebaseAuth.currentUser?.uid;
+
   bool isRegistrationPending = false;
 
   Future<void> login({required String email, required String password}) async {

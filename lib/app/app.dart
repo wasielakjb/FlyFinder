@@ -16,6 +16,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => inject<AppThemeCubit>(),
+      lazy: false,
       child: BlocBuilder<AppThemeCubit, ThemeMode>(
         builder: (context, themeMode) => MaterialApp.router(
           debugShowCheckedModeBanner: false,

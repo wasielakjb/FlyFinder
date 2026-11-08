@@ -19,10 +19,10 @@ enum ResponseDialogType {
 
   Color resolveBackgroundColor(BuildContext context) {
     return switch (this) {
-      ResponseDialogType.Success => Colors.green[100]!,
-      ResponseDialogType.Warning => Colors.orange[100]!,
+      ResponseDialogType.Success => Colors.green[50]!,
+      ResponseDialogType.Warning => Colors.orange[50]!,
       ResponseDialogType.Error => context.errorContainer,
-      ResponseDialogType.Info => Colors.blue[100]!,
+      ResponseDialogType.Info => Colors.blue[50]!,
     };
   }
 
