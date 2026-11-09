@@ -5,8 +5,8 @@ import 'package:flyfinder/extensions/reactive_form_extension.dart';
 import 'package:flyfinder/features/payment_methods/domain/model/payment_method_resource.dart';
 import 'package:flyfinder/features/payment_methods/domain/repository/payment_methods_repository.dart';
 import 'package:flyfinder/features/payment_methods/domain/request/payment_method_request.dart';
-import 'package:flyfinder/features/payment_methods/ui/form/form_builders/payment_method_fg_factory.dart';
-import 'package:flyfinder/features/payment_methods/ui/form/form_builders/payment_method_form_keys.dart';
+import 'package:flyfinder/features/payment_methods/ui/screens/form/form_builders/payment_method_fg_factory.dart';
+import 'package:flyfinder/features/payment_methods/ui/screens/form/form_builders/payment_method_form_keys.dart';
 import 'package:flyfinder/templates/form/cubit/form_cubit.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 

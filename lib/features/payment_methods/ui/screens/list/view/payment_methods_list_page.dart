@@ -5,8 +5,8 @@ import 'package:flyfinder/app/router/app_router.gr.dart';
 import 'package:flyfinder/core/domain/misc/app_mocks.dart';
 import 'package:flyfinder/di.dart';
 import 'package:flyfinder/extensions/color_scheme_getters_extension.dart';
-import 'package:flyfinder/features/payment_methods/ui/list/cubit/payment_methods_list_cubit.dart';
-import 'package:flyfinder/features/payment_methods/ui/list/widgets/payment_method_list_tile_wgt.dart';
+import 'package:flyfinder/features/payment_methods/ui/screens/list/cubit/payment_methods_list_cubit.dart';
+import 'package:flyfinder/features/payment_methods/ui/screens/list/widgets/payment_method_list_tile_wgt.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 @RoutePage()

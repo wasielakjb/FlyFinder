@@ -1,5 +1,5 @@
 import 'package:flyfinder/features/payment_methods/domain/model/payment_method_resource.dart';
-import 'package:flyfinder/features/payment_methods/ui/form/form_builders/payment_method_form_keys.dart';
+import 'package:flyfinder/features/payment_methods/ui/screens/form/form_builders/payment_method_form_keys.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 typedef _K = PaymentMethodFormKeys;
