@@ -11,9 +11,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 
 import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flyfinder/features/payment_methods/ui/form/view/payment_method_form_page.dart'
+import 'package:flutter/material.dart' as _i11;
+import 'package:flyfinder/features/payment_methods/domain/model/payment_method_resource.dart'
+    as _i10;
+import 'package:flyfinder/features/payment_methods/ui/screens/form/view/payment_method_form_page.dart'
     as _i4;
-import 'package:flyfinder/features/payment_methods/ui/list/view/payment_methods_list_page.dart'
+import 'package:flyfinder/features/payment_methods/ui/screens/list/view/payment_methods_list_page.dart'
     as _i5;
 import 'package:flyfinder/screens/auth/screens/login/view/login_page.dart'
     as _i3;
@@ -74,18 +77,60 @@ class LoginRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.PaymentMethodFormPage]
-class PaymentMethodFormRoute extends _i9.PageRouteInfo<void> {
-  const PaymentMethodFormRoute({List<_i9.PageRouteInfo>? children})
-    : super(PaymentMethodFormRoute.name, initialChildren: children);
+class PaymentMethodFormRoute
+    extends _i9.PageRouteInfo<PaymentMethodFormRouteArgs> {
+  PaymentMethodFormRoute({
+    _i10.PaymentMethodResource? resource,
+    _i11.Key? key,
+    List<_i9.PageRouteInfo>? children,
+  }) : super(
+         PaymentMethodFormRoute.name,
+         args: PaymentMethodFormRouteArgs(resource: resource, key: key),
+         rawQueryParams: {'resource': resource},
+         initialChildren: children,
+       );
 
   static const String name = 'PaymentMethodFormRoute';
 
   static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
-      return _i9.WrappedRoute(child: const _i4.PaymentMethodFormPage());
+      final queryParams = data.queryParams;
+      final args = data.argsAs<PaymentMethodFormRouteArgs>(
+        orElse: () =>
+            PaymentMethodFormRouteArgs(resource: queryParams.get('resource')),
+      );
+      return _i9.WrappedRoute(
+        child: _i4.PaymentMethodFormPage(
+          resource: args.resource,
+          key: args.key,
+        ),
+      );
     },
   );
+}
+
+class PaymentMethodFormRouteArgs {
+  const PaymentMethodFormRouteArgs({this.resource, this.key});
+
+  final _i10.PaymentMethodResource? resource;
+
+  final _i11.Key? key;
+
+  @override
+  String toString() {
+    return 'PaymentMethodFormRouteArgs{resource: $resource, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PaymentMethodFormRouteArgs) return false;
+    return resource == other.resource && key == other.key;
+  }
+
+  @override
+  int get hashCode => resource.hashCode ^ key.hashCode;
 }
 
 /// generated route for

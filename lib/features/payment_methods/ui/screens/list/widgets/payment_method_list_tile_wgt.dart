@@ -10,13 +10,13 @@ import 'package:skeletonizer/skeletonizer.dart';
 class PaymentMethodListTileWidget extends StatelessWidget {
   const PaymentMethodListTileWidget(
     this.item, {
-    required this.onTap,
+    required this.onEdit,
     required this.onDelete,
     super.key,
   });
 
   final PaymentMethodResource item;
-  final void Function(PaymentMethodResource) onTap;
+  final void Function(PaymentMethodResource) onEdit;
   final void Function(PaymentMethodResource) onDelete;
 
   @override
@@ -24,8 +24,13 @@ class PaymentMethodListTileWidget extends StatelessWidget {
     return Slidable(
       endActionPane: ActionPane(
         motion: const ScrollMotion(),
-        extentRatio: 0.2,
+        extentRatio: 0.4,
         children: [
+          SlidableAction(
+            onPressed: (c) => onEdit.call(item),
+            backgroundColor: context.surfaceContainer,
+            icon: Icons.edit,
+          ),
           SlidableAction(
             onPressed: (c) => onDelete.call(item),
             backgroundColor: context.error,
@@ -33,43 +38,40 @@ class PaymentMethodListTileWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: InkWell(
-        onTap: () => onTap.call(item),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: Row(
-            spacing: 16,
-            children: [
-              Skeleton.leaf(
-                child: Container(
-                  height: 32,
-                  color: item.type == CardType.visa ? context.primary : null,
-                  child: getCardTypeIcon(cardType: item.type),
-                ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        child: Row(
+          spacing: 16,
+          children: [
+            Skeleton.leaf(
+              child: Container(
+                height: 32,
+                color: item.type == CardType.visa ? context.primary : null,
+                child: getCardTypeIcon(cardType: item.type),
               ),
-              Expanded(
-                child: Column(
-                  spacing: 4,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '•••• •••• •••• ${item.number}',
-                      style: context.titleMedium,
-                    ),
-                    Text(
-                      item.expirationDate.toCardFormat,
-                      style: context.bodyMedium,
-                    ),
-                  ],
-                ),
+            ),
+            Expanded(
+              child: Column(
+                spacing: 4,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '•••• •••• •••• ${item.number}',
+                    style: context.titleMedium,
+                  ),
+                  Text(
+                    item.expirationDate.toCardFormat,
+                    style: context.bodyMedium,
+                  ),
+                ],
               ),
-              if (item.isActive)
-                Icon(
-                  Icons.check_circle,
-                  color: context.primary,
-                ),
-            ],
-          ),
+            ),
+            if (item.isActive)
+              Icon(
+                Icons.check_circle,
+                color: context.primary,
+              ),
+          ],
         ),
       ),
     );

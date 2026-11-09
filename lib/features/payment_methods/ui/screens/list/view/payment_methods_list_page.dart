@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +34,7 @@ class PaymentMethodsListPage extends StatelessWidget
       appBar: AppBar(title: const Text('Payment methods')),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await context.pushRoute(const PaymentMethodFormRoute());
+          await context.pushRoute(PaymentMethodFormRoute());
           await cubit.refresh();
         },
         child: Icon(Icons.add, color: context.surface),
@@ -47,7 +49,12 @@ class PaymentMethodsListPage extends StatelessWidget
                 itemCount: state.items?.length ?? 5,
                 itemBuilder: (context, index) => PaymentMethodListTileWidget(
                   state.items?[index] ?? AppMocks.paymentMethod,
-                  onTap: (item) {},
+                  onEdit: (item) async {
+                    final result = await context.pushRoute<bool>(
+                      PaymentMethodFormRoute(resource: item),
+                    );
+                    if (result ?? false) unawaited(cubit.refresh());
+                  },
                   onDelete: (item) => cubit.delete(item.id),
                 ),
                 separatorBuilder: (_, _) =>

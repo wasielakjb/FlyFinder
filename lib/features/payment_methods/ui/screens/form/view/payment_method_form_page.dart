@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flyfinder/di.dart';
+import 'package:flyfinder/features/payment_methods/domain/model/payment_method_resource.dart';
 import 'package:flyfinder/features/payment_methods/ui/screens/form/cubit/payment_method_form_cubit.dart';
 import 'package:flyfinder/features/payment_methods/ui/screens/form/form_builders/payment_method_form_keys.dart';
 import 'package:flyfinder/templates/form/models/card_expiration_date_formatter.dart';
@@ -12,18 +13,25 @@ import 'package:flyfinder/templates/form/ui/widgets/form_credit_card_field.dart'
 import 'package:flyfinder/templates/form/ui/widgets/form_text_field.dart';
 import 'package:flyfinder/templates/layout/app_expanded_row.dart';
 import 'package:flyfinder/templates/layout/sliver_to_inset_box_adapter.dart';
+
 typedef _K = PaymentMethodFormKeys;
 
 @RoutePage()
 class PaymentMethodFormPage extends StatelessWidget
     implements AutoRouteWrapper {
-  const PaymentMethodFormPage({super.key});
+  const PaymentMethodFormPage({
+    @queryParam this.resource,
+    super.key,
+  });
+  
+  final PaymentMethodResource? resource;
 
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
       create: (_) => PaymentMethodFormCubit(
         repository: inject(),
+        resource: resource,
       ),
       child: this,
     );
