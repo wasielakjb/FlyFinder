@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
                 title: 'Content',
                 buttons: [
                   RoutePlainButton(
-                    route: PaymentMethodFormRoute(),
+                    route: PaymentMethodsListRoute(),
                     title: 'Credit Cards',
                     icon: Icons.credit_card_outlined,
                   ),

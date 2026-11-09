@@ -11,14 +11,23 @@ abstract class PaymentMethodFormGroupFactory {
       validators: [Validators.required],
     ),
     _K.name: FormControl<String>(
+      value: resource?.name,
       validators: [Validators.required],
     ),
     _K.cvv: FormControl<String>(
       validators: [Validators.required],
     ),
     _K.expirationDate: FormControl<String>(
-      value: resource?.expirationDate,
+      value: resource?.expirationDate.toExpiryString(),
       validators: [Validators.required],
     ),
   });
+}
+
+extension on DateTime {
+  String toExpiryString() {
+    final month = this.month.toString().padLeft(2, '0');
+    final year = (this.year % 100).toString().padLeft(2, '0');
+    return '$month/$year';
+  }
 }

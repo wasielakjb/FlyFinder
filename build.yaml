@@ -14,3 +14,4 @@ targets:
         generate_for:
           - lib/features/*/domain/model/**.dart
           - lib/features/*/domain/request/**.dart
+          - lib/features/*/data/network/**.dart

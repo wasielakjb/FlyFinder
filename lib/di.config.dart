@@ -18,6 +18,8 @@ import 'package:flyfinder/app/guards/auth_guard.dart' as _i308;
 import 'package:flyfinder/app/router/app_router.dart' as _i246;
 import 'package:flyfinder/core/di/app_module.dart' as _i418;
 import 'package:flyfinder/features/auth/auth_repository_impl.dart' as _i1071;
+import 'package:flyfinder/features/payment_methods/data/data_source/payment_methods_remote_ds.dart'
+    as _i176;
 import 'package:flyfinder/features/payment_methods/data/repository/payment_methods_repository_impl.dart'
     as _i321;
 import 'package:flyfinder/features/payment_methods/domain/repository/payment_methods_repository.dart'
@@ -41,8 +43,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1071.AuthRepository>(() => _i1071.AuthRepository());
     gh.lazySingleton<_i59.FirebaseAuth>(() => appModule.firebaseAuth);
     gh.lazySingleton<_i974.FirebaseFirestore>(() => appModule.firestore);
-    gh.singleton<_i102.PaymentMethodsRepository>(
-      () => _i321.PaymentMethodsRepositoryImpl(
+    gh.singleton<_i176.PaymentMethodsRemoteDataSource>(
+      () => _i176.PaymentMethodsRemoteDataSource(
         gh<_i974.FirebaseFirestore>(),
         gh<_i1071.AuthRepository>(),
       ),
@@ -52,6 +54,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i246.AppRouter>(
       () => _i246.AppRouter(authGuard: gh<_i308.AuthGuard>()),
+    );
+    gh.singleton<_i102.PaymentMethodsRepository>(
+      () => _i321.PaymentMethodsRepositoryImpl(
+        gh<_i176.PaymentMethodsRemoteDataSource>(),
+      ),
     );
     return this;
   }

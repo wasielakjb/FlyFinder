@@ -1,3 +1,4 @@
+import 'package:awesome_card/extra/card_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,11 @@ class PaymentMethodResource extends Equatable {
     required this.isActive,
   });
 
-  final int id;
+  final String id;
   final String number;
   final String name;
-  final String type;
-  final String expirationDate;
+  final CardType type;
+  final DateTime expirationDate;
   final bool isActive;
 
   @override
