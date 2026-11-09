@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flyfinder/app/router/app_router.gr.dart';
+import 'package:flyfinder/templates/layout/bottom_navigation_bar/app_scaffold.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -8,13 +8,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: IconButton(
-          onPressed: () => context.pushRoute(const ProfileRoute()),
-          icon: const Icon(Icons.person),
-        ),
-      ),
-    );
+    return const AppScaffold();
   }
 }

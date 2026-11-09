@@ -4,9 +4,10 @@ import 'package:flyfinder/features/payment_methods/ui/routing/payment_methods_ro
 
 abstract class ProfileRoutes {
   static List<AutoRoute> routes = [
-    AutoRoute(
+    CustomRoute<void>(
       path: '/profile',
       page: ProfileRoute.page,
+      transitionsBuilder: TransitionsBuilders.noTransition,
     ),
     AutoRoute(
       path: '/profile/theme-mode',
