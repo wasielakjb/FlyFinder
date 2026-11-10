@@ -1,6 +1,5 @@
 import 'package:awesome_card/extra/helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flyfinder/core/domain/request/form_request.dart';
 import 'package:flyfinder/extensions/reactive_form_extension.dart';
 import 'package:flyfinder/features/payment_methods/domain/model/payment_method_resource.dart';
 import 'package:flyfinder/features/payment_methods/domain/repository/payment_methods_repository.dart';
@@ -29,7 +28,7 @@ class PaymentMethodFormCubit extends FormCubit<PaymentMethodResource> {
   FormGroup buildForm() => PaymentMethodFormGroupFactory.create(state.resource);
 
   @override
-  FormRequest mapBeforeSubmit() {
+  PaymentMethodRequest mapBeforeSubmit() {
     final number = formGroup.controlVal<String>(_K.number)!;
     return PaymentMethodRequest(
       number: number.last4,
