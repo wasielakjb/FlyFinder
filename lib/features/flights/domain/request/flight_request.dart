@@ -1,29 +1,29 @@
 import 'package:flyfinder/core/domain/model/json.dart';
 import 'package:flyfinder/core/domain/request/form_request.dart';
-import 'package:flyfinder/features/flights/domain/model/flight_passengers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'flight_request.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, createFactory: false)
 class FlightRequest implements FormRequest {
-  const FlightRequest({
-    required this.travelType,
-    required this.from,
-    required this.to,
+  FlightRequest({
+    required this.origin,
+    required this.destination,
     required this.departureDate,
     required this.returnDate,
-    required this.passengers,
-    required this.travelClass,
+    required this.cabinClass,
+    required this.adults,
+    required this.children,
   });
 
-  final int travelType;
-  final String from;
-  final String to;
-  final DateTime departureDate;
-  final DateTime? returnDate;
-  final FlightPassengers passengers;
-  final int travelClass;
+  final String origin;
+  final String destination;
+  final String departureDate;
+  @JsonKey(includeIfNull: false)
+  final String? returnDate;
+  final String cabinClass;
+  final int adults;
+  final int children;
 
   @override
   Json toJson() => _$FlightRequestToJson(this);

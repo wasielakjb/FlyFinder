@@ -11,6 +11,7 @@ dependencies:
   awesome_card: ^1.2.0
   cloud_firestore: ^6.10.2
   collection: ^1.19.1
+  dio: ^5.11.1
   equatable: ^3.0.0
   firebase_auth: ^6.7.1
   firebase_core: ^4.15.0

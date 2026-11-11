@@ -8,11 +8,11 @@ part of 'flight_request.dart';
 
 Map<String, dynamic> _$FlightRequestToJson(FlightRequest instance) =>
     <String, dynamic>{
-      'travel_type': instance.travelType,
-      'from': instance.from,
-      'to': instance.to,
-      'departure_date': instance.departureDate.toIso8601String(),
-      'return_date': instance.returnDate?.toIso8601String(),
-      'passengers': instance.passengers,
-      'travel_class': instance.travelClass,
+      'origin': instance.origin,
+      'destination': instance.destination,
+      'departure_date': instance.departureDate,
+      'return_date': ?instance.returnDate,
+      'cabin_class': instance.cabinClass,
+      'adults': instance.adults,
+      'children': instance.children,
     };
