@@ -1,7 +1,6 @@
 import 'package:awesome_card/extra/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flyfinder/extensions/reactive_form_extension.dart';
-import 'package:flyfinder/features/payment_methods/domain/model/payment_method_resource.dart';
 import 'package:flyfinder/features/payment_methods/domain/repository/payment_methods_repository.dart';
 import 'package:flyfinder/features/payment_methods/domain/request/payment_method_request.dart';
 import 'package:flyfinder/features/payment_methods/ui/screens/form/form_builders/payment_method_fg_factory.dart';
@@ -11,21 +10,16 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 typedef _K = PaymentMethodFormKeys;
 
-class PaymentMethodFormCubit extends FormCubit<PaymentMethodResource> {
+class PaymentMethodFormCubit extends FormCubit {
   PaymentMethodFormCubit({
     required this.repository,
-    this.resourceId,
-    super.resource,
   });
-  
-  @override
-  final String? resourceId;
 
   @protected
   final PaymentMethodsRepository repository;
 
   @override
-  FormGroup buildForm() => PaymentMethodFormGroupFactory.create(state.resource);
+  FormGroup buildForm() => PaymentMethodFormGroupFactory.create();
 
   @override
   PaymentMethodRequest mapBeforeSubmit() {
@@ -41,9 +35,7 @@ class PaymentMethodFormCubit extends FormCubit<PaymentMethodResource> {
 
   @override
   Future<dynamic> sendForm(PaymentMethodRequest request) {
-    return resourceId != null
-        ? repository.update(resourceId!, request)
-        : repository.create(request);
+    return repository.create(request);
   }
 }
 

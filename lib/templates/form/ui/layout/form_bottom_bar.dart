@@ -17,7 +17,7 @@ class FormBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FormCubit, FormCubitState<dynamic>>(
+    return BlocBuilder<FormCubit, FormCubitState>(
       bloc: FormCubit.of(context),
       builder: (context, state) => Skeleton.keep(
         child: ColoredBox(
@@ -28,9 +28,7 @@ class FormBottomBar extends StatelessWidget {
               child: FilledButton(
                 onPressed: state.pending ? null : FormCubit.of(context).submit,
                 child: AnyButtonContent(
-                  text: FormCubit.of(context).isCreating
-                      ? creatingText ?? 'Create'
-                      : updatingText ?? 'Update',
+                  text: 'Create',
                   pending: state.pending,
                 ),
               ),

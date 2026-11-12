@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flyfinder/extensions/color_scheme_getters_extension.dart';
 import 'package:flyfinder/extensions/text_style_getters_extension.dart';
+import 'package:flyfinder/features/flights/ui/form/view/flights_form_wgt.dart';
 import 'package:flyfinder/templates/layout/bottom_navigation_bar/app_scaffold.dart';
 
 @RoutePage()
@@ -28,6 +30,25 @@ class HomePage extends StatelessWidget {
                   style: context.labelLarge,
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                color: context.surface,
+                boxShadow: [
+                  BoxShadow(
+                    offset: const Offset(0, 16),
+                    blurRadius: 32,
+                    spreadRadius: -12,
+                    color: context.onSurface.withAlpha(26),
+                  ),
+                ],
+              ),
+              child: const FlightsFormWidget(),
             ),
           ),
         ],

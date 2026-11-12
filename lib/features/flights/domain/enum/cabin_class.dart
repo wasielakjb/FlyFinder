@@ -9,5 +9,12 @@ enum CabinClass {
   @JsonValue('business')
   business,
   @JsonValue('first')
-  first,
+  first;
+
+  String resolveLabel() => switch (this) {
+    economy => 'Economy',
+    premiumEconomy => 'Premium economy',
+    business => 'Business',
+    first => 'First',
+  };
 }

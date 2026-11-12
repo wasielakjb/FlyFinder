@@ -32,6 +32,13 @@ abstract final class AppTheme {
         ),
       ),
     ),
+    searchBarTheme: SearchBarThemeData(
+      elevation: const WidgetStatePropertyAll(0),
+      padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 12)),
+      hintStyle: WidgetStatePropertyAll(lightTextTheme.bodyLarge?.copyWith(color: lightColorScheme.outline)),
+      textStyle: WidgetStatePropertyAll(lightTextTheme.bodyLarge),
+      backgroundColor: WidgetStatePropertyAll(lightColorScheme.surfaceContainer),
+    ),
   );
 
   static final dark = ThemeData(

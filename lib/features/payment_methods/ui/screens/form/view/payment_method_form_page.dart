@@ -31,7 +31,6 @@ class PaymentMethodFormPage extends StatelessWidget
     return BlocProvider(
       create: (_) => PaymentMethodFormCubit(
         repository: inject(),
-        resource: resource,
       ),
       child: this,
     );

@@ -1,45 +1,40 @@
 part of 'form_cubit.dart';
 
-class FormCubitState<T> extends Equatable {
-  factory FormCubitState(T? resource) => FormCubitState._(
-    initialized: false,
-    pending: false,
-    result: null,
-    resource: resource,
-  );
-
+class FormCubitState extends Equatable {
   const FormCubitState._({
     required this.initialized,
     required this.pending,
     required this.result,
-    required this.resource,
   });
+
+  factory FormCubitState.inital() => const FormCubitState._(
+    initialized: false,
+    pending: false,
+    result: null,
+  );
 
   final bool initialized;
   final bool pending;
-  final Result<dynamic>? result;
-  final T? resource;
+  final dynamic result;
 
-  FormCubitState<T> copyWith({
+  FormCubitState copyWith({
     bool? initialized,
     bool? pending,
-    NullableCopy<Result<dynamic>>? result,
-    T? resource,
+    NullableCopy<dynamic>? result,
   }) {
     return FormCubitState._(
       initialized: initialized ?? this.initialized,
       pending: pending ?? this.pending,
       result: result.apply(this.result),
-      resource: resource ?? this.resource,
     );
   }
 
-  FormCubitState<T> asPending() => copyWith(
+  FormCubitState asPending() => copyWith(
     pending: true,
     result: () => null,
   );
 
-  FormCubitState<T> withResult(Result<dynamic> response) => copyWith(
+  FormCubitState withResult(dynamic response) => copyWith(
     pending: false,
     result: () => response,
   );
@@ -49,6 +44,5 @@ class FormCubitState<T> extends Equatable {
     initialized,
     pending,
     result,
-    resource,
   ];
 }

@@ -11,6 +11,7 @@ dependencies:
   awesome_card: ^1.2.0
   cloud_firestore: ^6.10.2
   collection: ^1.19.1
+  custom_sliding_segmented_control: ^1.8.5
   dio: ^5.11.1
   equatable: ^3.0.0
   firebase_auth: ^6.7.1
@@ -24,7 +25,9 @@ dependencies:
   google_fonts: ^8.2.1
   hydrated_bloc: ^11.0.0
   injectable: ^3.0.0
+  intl: ^0.20.2
   path_provider: ^2.1.6
+  reactive_date_time_picker: ^5.0.1
   reactive_forms: ^18.2.2
   skeletonizer: ^3.0.0
 
