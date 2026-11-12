@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class FlightPassengers extends Equatable {
   const FlightPassengers({
-    this.adults = 1,
+    this.adults = 0,
     this.children = 0,
   });
 

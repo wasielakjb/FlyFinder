@@ -33,9 +33,7 @@ class FormFlightPassangersSelector extends StatelessWidget {
                 context,
                 value: field.value,
               );
-              if (res != null) {
-                field.didChange(res);
-              }
+              field.didChange(res);
             },
             child: InputDecorator(
               isEmpty: field.value == null,
@@ -65,12 +63,6 @@ class FormFlightPassangersSelector extends StatelessWidget {
                       ],
                     )
                   : null,
-              // child: field.value != null
-              //     ? Text(
-              //         '${field.value!.total} passangers',
-              //         style: context.bodyLarge.copyWith(fontSize: 16),
-              //       )
-              //     : null,
             ),
           ),
         ),
