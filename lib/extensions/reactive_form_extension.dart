@@ -43,4 +43,12 @@ extension FormGroupX on FormGroup {
       return false;
     }
   }
+
+  void swapVal(String first, String second) {
+    final firstControl = controlX<dynamic>(first);
+    final secondControl = controlX<dynamic>(second);
+    final value = firstControl.value;
+    firstControl.patchValue(secondControl.value);
+    secondControl.patchValue(value);
+  }
 }

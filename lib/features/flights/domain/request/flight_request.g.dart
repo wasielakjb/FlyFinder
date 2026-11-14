@@ -12,14 +12,14 @@ Map<String, dynamic> _$FlightRequestToJson(FlightRequest instance) =>
       'destination': instance.destination,
       'departure_date': instance.departureDate,
       'return_date': ?instance.returnDate,
-      'cabin_class': _$CabinClassEnumMap[instance.cabinClass]!,
+      'flight_class': _$FlightClassEnumMap[instance.flightClass]!,
       'adults': instance.adults,
       'children': instance.children,
     };
 
-const _$CabinClassEnumMap = {
-  CabinClass.economy: 'economy',
-  CabinClass.premiumEconomy: 'premium_economy',
-  CabinClass.business: 'business',
-  CabinClass.first: 'first',
+const _$FlightClassEnumMap = {
+  FlightClass.economy: 'economy',
+  FlightClass.premiumEconomy: 'premium_economy',
+  FlightClass.business: 'business',
+  FlightClass.first: 'first',
 };

@@ -1,7 +1,7 @@
 import 'package:flyfinder/core/domain/model/json.dart';
 import 'package:flyfinder/features/flights/data/network/network_outbound.dart';
 import 'package:flyfinder/features/flights/data/network/network_price.dart';
-import 'package:flyfinder/features/flights/domain/enum/cabin_class.dart';
+import 'package:flyfinder/features/flights/domain/enum/flight_class.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'network_itinerary.g.dart';
@@ -12,7 +12,7 @@ class NetworkItinerary {
     required this.ignavId,
     required this.price,
     required this.outbound,
-    required this.cabinClass,
+    required this.flightClass,
     required this.hasMixedCarriers,
   });
 
@@ -22,7 +22,7 @@ class NetworkItinerary {
   final String ignavId;
   final NetworkPrice price;
   final NetworkOutbound outbound;
-  final CabinClass cabinClass;
+  final FlightClass flightClass;
   final bool hasMixedCarriers;
 
   Json toJson() => _$NetworkItineraryToJson(this);

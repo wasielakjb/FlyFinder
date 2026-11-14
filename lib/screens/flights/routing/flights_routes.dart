@@ -3,10 +3,9 @@ import 'package:flyfinder/app/router/app_router.gr.dart';
 
 abstract class FlightsRoutes {
   static List<AutoRoute> routes = [
-    CustomRoute<void>(
+    AutoRoute(
       path: '/flights',
       page: FlightsRoute.page,
-      transitionsBuilder: TransitionsBuilders.noTransition,
     ),
   ];
 }

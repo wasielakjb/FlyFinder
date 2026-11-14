@@ -20,6 +20,7 @@ abstract final class AppTheme {
       fillColor: lightColorScheme.surfaceContainer,
       hintStyle: lightTextTheme.bodyLarge?.copyWith(
         color: lightColorScheme.outline,
+        overflow: TextOverflow.ellipsis,
       ),
       prefixIconColor: lightColorScheme.outlineVariant,
       suffixIconColor: lightColorScheme.outlineVariant,
@@ -58,6 +59,7 @@ abstract final class AppTheme {
       fillColor: darkColorScheme.surfaceContainer,
       hintStyle: darkTextTheme.bodyLarge?.copyWith(
         color: darkColorScheme.outline,
+        overflow: TextOverflow.ellipsis,
       ),
       prefixIconColor: darkColorScheme.outlineVariant,
       suffixIconColor: darkColorScheme.outlineVariant,

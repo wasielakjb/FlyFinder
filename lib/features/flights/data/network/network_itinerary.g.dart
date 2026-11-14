@@ -13,7 +13,7 @@ NetworkItinerary _$NetworkItineraryFromJson(Map<String, dynamic> json) =>
       outbound: NetworkOutbound.fromJson(
         json['outbound'] as Map<String, dynamic>,
       ),
-      cabinClass: $enumDecode(_$CabinClassEnumMap, json['cabin_class']),
+      flightClass: $enumDecode(_$FlightClassEnumMap, json['flight_class']),
       hasMixedCarriers: json['has_mixed_carriers'] as bool,
     );
 
@@ -22,13 +22,13 @@ Map<String, dynamic> _$NetworkItineraryToJson(NetworkItinerary instance) =>
       'ignav_id': instance.ignavId,
       'price': instance.price,
       'outbound': instance.outbound,
-      'cabin_class': _$CabinClassEnumMap[instance.cabinClass]!,
+      'flight_class': _$FlightClassEnumMap[instance.flightClass]!,
       'has_mixed_carriers': instance.hasMixedCarriers,
     };
 
-const _$CabinClassEnumMap = {
-  CabinClass.economy: 'economy',
-  CabinClass.premiumEconomy: 'premium_economy',
-  CabinClass.business: 'business',
-  CabinClass.first: 'first',
+const _$FlightClassEnumMap = {
+  FlightClass.economy: 'economy',
+  FlightClass.premiumEconomy: 'premium_economy',
+  FlightClass.business: 'business',
+  FlightClass.first: 'first',
 };

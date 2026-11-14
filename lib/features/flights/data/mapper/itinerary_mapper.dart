@@ -8,7 +8,7 @@ extension NetworkItineraryToEntityMapper on NetworkItinerary {
     id: ignavId,
     price: price.asEntity(),
     outbound: outbound.asEntity(),
-    cabinClass: cabinClass,
+    flightClass: flightClass,
     hasMixedCarriers: hasMixedCarriers,
   );
 }

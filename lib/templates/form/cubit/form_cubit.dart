@@ -22,7 +22,6 @@ abstract class FormCubit extends Cubit<FormCubitState> {
   void init() {
     _formGroup = buildForm();
     assert(_formGroup != null, 'Form has not been initialized!');
-
     emit(state.copyWith(initialized: true));
   }
 

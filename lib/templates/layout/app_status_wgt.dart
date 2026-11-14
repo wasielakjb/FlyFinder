@@ -24,7 +24,7 @@ class AppStatusWidget extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: context.surfaceContainerLow,
+            color: context.surfaceContainerHighest
           ),
           child: Icon(icon, size: 28),
         ),
