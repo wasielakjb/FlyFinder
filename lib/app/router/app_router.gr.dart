@@ -69,7 +69,9 @@ class FlightSearchResultRoute
     name,
     builder: (data) {
       final args = data.argsAs<FlightSearchResultRouteArgs>();
-      return _i2.FlightSearchResultPage(request: args.request, key: args.key);
+      return _i12.WrappedRoute(
+        child: _i2.FlightSearchResultPage(request: args.request, key: args.key),
+      );
     },
   );
 }

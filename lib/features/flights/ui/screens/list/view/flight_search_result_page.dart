@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flyfinder/di.dart';
 import 'package:flyfinder/features/flights/domain/request/flight_request.dart';
 import 'package:flyfinder/features/flights/ui/screens/list/cubit/flight_search_result_cubit.dart';
+import 'package:flyfinder/features/flights/ui/screens/list/widget/search_result_app_bar.dart';
 
 @RoutePage()
 class FlightSearchResultPage extends StatelessWidget
@@ -28,6 +29,18 @@ class FlightSearchResultPage extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SearchResultAppBar(request),
+          SliverList.builder(
+            itemCount: 20,
+            itemBuilder: (context, index) => ListTile(
+              title: Text('$index'),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

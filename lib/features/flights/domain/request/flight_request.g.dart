@@ -10,8 +10,8 @@ Map<String, dynamic> _$FlightRequestToJson(FlightRequest instance) =>
     <String, dynamic>{
       'origin': instance.origin,
       'destination': instance.destination,
-      'departure_date': instance.departureDate,
-      'return_date': ?instance.returnDate,
+      'departure_date': instance.departureDate.toIso8601String(),
+      'return_date': ?instance.returnDate?.toIso8601String(),
       'flight_class': _$FlightClassEnumMap[instance.flightClass]!,
       'adults': instance.adults,
       'children': instance.children,

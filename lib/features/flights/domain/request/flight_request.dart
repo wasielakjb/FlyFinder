@@ -1,5 +1,6 @@
 import 'package:flyfinder/core/domain/model/json.dart';
 import 'package:flyfinder/core/domain/request/form_request.dart';
+import 'package:flyfinder/features/flights/data/network/network_airport.dart';
 import 'package:flyfinder/features/flights/domain/enum/flight_class.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,11 +18,11 @@ class FlightRequest implements FormRequest {
     required this.children,
   });
 
-  final String origin;
-  final String destination;
-  final String departureDate;
+  final NetworkAirport origin;
+  final NetworkAirport destination;
+  final DateTime departureDate;
   @JsonKey(includeIfNull: false)
-  final String? returnDate;
+  final DateTime? returnDate;
   final FlightClass flightClass;
   final int adults;
   final int children;

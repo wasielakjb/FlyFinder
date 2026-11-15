@@ -9,3 +9,12 @@ extension NetworkAirportToEntityMapper on NetworkAirport {
     country: country,
   );
 }
+
+extension AirportToRequestMapper on AirportResource {
+  NetworkAirport asRequest() => NetworkAirport(
+    code: code,
+    name: name,
+    city: city,
+    country: country,
+  );
+}
