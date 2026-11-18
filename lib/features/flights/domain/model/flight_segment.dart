@@ -2,18 +2,14 @@ import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 @immutable
-class Segment extends Equatable {
-  const Segment({
+class FlightSegment extends Equatable {
+  const FlightSegment({
     required this.flightNumber,
     required this.operatingCarrierName,
     required this.departureAirport,
-    required this.departureTimeLocal,
-    required this.departureTimezone,
-    required this.departureTimeUtc,
+    required this.departureDateTime,
     required this.arrivalAirport,
-    required this.arrivalTimeLocal,
-    required this.arrivalTimezone,
-    required this.arrivalTimeUtc,
+    required this.arrivalDateTime,
     required this.duration,
     required this.aircraft,
   });
@@ -21,13 +17,9 @@ class Segment extends Equatable {
   final String? flightNumber;
   final String? operatingCarrierName;
   final String departureAirport;
-  final DateTime departureTimeLocal;
-  final String? departureTimezone;
-  final DateTime? departureTimeUtc;
+  final DateTime departureDateTime;
   final String arrivalAirport;
-  final DateTime arrivalTimeLocal;
-  final String? arrivalTimezone;
-  final DateTime? arrivalTimeUtc;
+  final DateTime arrivalDateTime;
   final Duration duration;
   final String? aircraft;
 
@@ -36,13 +28,7 @@ class Segment extends Equatable {
     flightNumber,
     operatingCarrierName,
     departureAirport,
-    departureTimeLocal,
-    departureTimezone,
-    departureTimeUtc,
     arrivalAirport,
-    arrivalTimeLocal,
-    arrivalTimezone,
-    arrivalTimeUtc,
     duration,
     aircraft,
   ];

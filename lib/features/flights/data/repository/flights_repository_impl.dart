@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flyfinder/features/flights/data/data_source/flights_remote_ds.dart';
 import 'package:flyfinder/features/flights/data/mapper/airport_mapper.dart';
-import 'package:flyfinder/features/flights/data/mapper/flight_mapper.dart';
+import 'package:flyfinder/features/flights/data/mapper/itinerary_mapper.dart';
 import 'package:flyfinder/features/flights/domain/model/airport_resource.dart';
 import 'package:flyfinder/features/flights/domain/model/flight_resource.dart';
 import 'package:flyfinder/features/flights/domain/repository/flights_repository.dart';
@@ -23,16 +23,20 @@ class FlightsRepositoryImpl implements FlightsRepository {
   }
 
   @override
-  Future<FlightResource> getOneWayFlights(FlightRequest request) {
+  Future<List<FlightResource>> getOneWayFlights(FlightRequest request) async {
     return remoteDS
         .oneWayFlightSearch(request.toJson())
-        .then((res) => res.asEntity());
+        .then(
+          (res) => res.itineraries.map((e) => e.asFlightResource()).toList(),
+        );
   }
 
   @override
-  Future<FlightResource> getRoundTripFlights(FlightRequest request) {
+  Future<List<FlightResource>> getRoundTripFlights(FlightRequest request) {
     return remoteDS
         .roundTripFlightSearch(request.toJson())
-        .then((res) => res.asEntity());
+        .then(
+          (res) => res.itineraries.map((e) => e.asFlightResource()).toList(),
+        );
   }
 }

@@ -1,14 +1,15 @@
-import 'package:flyfinder/features/flights/data/mapper/outbound_mapper.dart';
 import 'package:flyfinder/features/flights/data/mapper/price_mapper.dart';
+import 'package:flyfinder/features/flights/data/mapper/segment_mapper.dart';
 import 'package:flyfinder/features/flights/data/network/network_itinerary.dart';
-import 'package:flyfinder/features/flights/domain/model/itinerary.dart';
+import 'package:flyfinder/features/flights/domain/model/flight_resource.dart';
 
 extension NetworkItineraryToEntityMapper on NetworkItinerary {
-  Itinerary asEntity() => Itinerary(
+  FlightResource asFlightResource() => FlightResource(
     id: ignavId,
     price: price.asEntity(),
-    outbound: outbound.asEntity(),
-    flightClass: flightClass,
-    hasMixedCarriers: hasMixedCarriers,
+    carrier: outbound.carrier,
+    duration: Duration(minutes: outbound.durationMinutes),
+    flightClass: cabinClass,
+    segments: outbound.segments.map((e) => e.asEntity()).toList(),
   );
 }

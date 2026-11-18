@@ -1,32 +1,34 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flyfinder/features/flights/domain/model/itinerary.dart';
+import 'package:flyfinder/features/flights/domain/enum/flight_class.dart';
+import 'package:flyfinder/features/flights/domain/model/flight_price.dart';
+import 'package:flyfinder/features/flights/domain/model/flight_segment.dart';
 
 @immutable
 class FlightResource extends Equatable {
   const FlightResource({
-    required this.origin,
-    required this.destination,
-    required this.departureDate,
-    required this.returnDate,
-    required this.observedAt,
-    required this.itineraries,
+    required this.id,
+    required this.price,
+    required this.carrier,
+    required this.duration,
+    required this.flightClass,
+    required this.segments,
   });
 
-  final String origin;
-  final String destination;
-  final DateTime departureDate;
-  final DateTime? returnDate;
-  final DateTime observedAt;
-  final List<Itinerary> itineraries;
+  final String id;
+  final FlightPrice price;
+  final String carrier;
+  final Duration duration;
+  final List<FlightSegment> segments;
+  final FlightClass flightClass;
 
   @override
   List<Object?> get props => [
-    origin,
-    destination,
-    departureDate,
-    returnDate,
-    observedAt,
-    itineraries,
+    id,
+    price,
+    carrier,
+    duration,
+    segments,
+    flightClass,
   ];
 }

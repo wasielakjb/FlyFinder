@@ -12,7 +12,7 @@ class NetworkItinerary {
     required this.ignavId,
     required this.price,
     required this.outbound,
-    required this.flightClass,
+    required this.cabinClass,
     required this.hasMixedCarriers,
   });
 
@@ -22,7 +22,7 @@ class NetworkItinerary {
   final String ignavId;
   final NetworkPrice price;
   final NetworkOutbound outbound;
-  final FlightClass flightClass;
+  final FlightClass cabinClass;
   final bool hasMixedCarriers;
 
   Json toJson() => _$NetworkItineraryToJson(this);

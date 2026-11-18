@@ -14,7 +14,8 @@ class SearchResultAppBar extends StatelessWidget {
   double get expandedHeight => 180;
 
   double _calculateExpandRatio(BoxConstraints constraints) {
-    var expandRatio = (constraints.maxHeight - kToolbarHeight) /
+    var expandRatio =
+        (constraints.maxHeight - kToolbarHeight) /
         (expandedHeight - kToolbarHeight);
 
     if (expandRatio > 1.0) expandRatio = 1.0;
@@ -28,7 +29,8 @@ class SearchResultAppBar extends StatelessWidget {
     return SliverAppBar(
       automaticallyImplyLeading: false,
       pinned: true,
-      backgroundColor: context.surfaceContainer,
+      backgroundColor: context.surface,
+      surfaceTintColor: Colors.transparent,
       expandedHeight: expandedHeight,
       elevation: 12,
       flexibleSpace: SafeArea(
@@ -110,7 +112,9 @@ class AppBarExtendedTitle extends StatelessWidget {
                   Text(origin, style: context.displaySmall),
                   Text(
                     'to',
-                    style: context.displaySmall.copyWith(color: context.outline),
+                    style: context.displaySmall.copyWith(
+                      color: context.outline,
+                    ),
                   ),
                   Text(destination, style: context.displaySmall),
                 ],
@@ -158,31 +162,33 @@ class AppBarCollapsedTitle extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       height: kToolbarHeight,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 44),
-        child: Row(
-          children: [
-            const Skeleton.keep(child: BackButton()),
-            Expanded(
-              child: FadeTransition(
-                opacity: Tween<double>(begin: 1, end: 0).animate(
-                  CurvedAnimation(
-                    parent: animation,
-                    curve: const Interval(0, 0.7, curve: Curves.easeOut),
-                  ),
+      child: Row(
+        children: [
+          const Skeleton.keep(child: BackButton()),
+          Expanded(
+            child: FadeTransition(
+              opacity: Tween<double>(begin: 1, end: 0).animate(
+                CurvedAnimation(
+                  parent: animation,
+                  curve: const Interval(0, 0.7, curve: Curves.easeOut),
                 ),
-                child: Align(
-                  child: Text(
-                    'Select Flight',
-                    style: context.titleLarge,
-                    textAlign: TextAlign.center,
-                  ),
+              ),
+              child: Align(
+                child: Text(
+                  'Select Flight',
+                  style: context.titleLarge,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
-            
-          ],
-        ),
+          ),
+          Skeleton.keep(
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.tune_outlined),
+            ),
+          ),
+        ],
       ),
     );
   }

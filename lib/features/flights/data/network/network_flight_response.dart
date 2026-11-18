@@ -2,27 +2,26 @@ import 'package:flyfinder/core/domain/model/json.dart';
 import 'package:flyfinder/features/flights/data/network/network_itinerary.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'network_flight.g.dart';
+part 'network_flight_response.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-class NetworkFlight {
-  const NetworkFlight({
+@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+class NetworkFlightResponse {
+  NetworkFlightResponse({
     required this.origin,
     required this.destination,
     required this.departureDate,
     required this.returnDate,
-    required this.observedAt,
     required this.itineraries,
+    required this.observedAt,
   });
 
-  factory NetworkFlight.fromJson(Json json) => _$NetworkFlightFromJson(json);
+  factory NetworkFlightResponse.fromJson(Json json) =>
+      _$NetworkFlightResponseFromJson(json);
 
   final String origin;
   final String destination;
   final String departureDate;
   final String? returnDate;
-  final String observedAt;
   final List<NetworkItinerary> itineraries;
-
-  Json toJson() => _$NetworkFlightToJson(this);
+  final String observedAt;
 }

@@ -1,19 +1,14 @@
-import 'package:flyfinder/extensions/kotlin_extensions.dart';
 import 'package:flyfinder/features/flights/data/network/network_segment.dart';
-import 'package:flyfinder/features/flights/domain/model/segment.dart';
+import 'package:flyfinder/features/flights/domain/model/flight_segment.dart';
 
 extension NetworkSegmentToEntityMapper on NetworkSegment {
-  Segment asEntity() => Segment(
+  FlightSegment asEntity() => FlightSegment(
     flightNumber: flightNumber,
     operatingCarrierName: operatingCarrierName,
     departureAirport: departureAirport,
-    departureTimeLocal: DateTime.parse(departureTimeLocal),
-    departureTimezone: departureTimezone,
-    departureTimeUtc: departureTimeUtc.let(DateTime.parse),
+    departureDateTime: DateTime.parse(departureTimeLocal),
     arrivalAirport: arrivalAirport,
-    arrivalTimeLocal: DateTime.parse(arrivalTimeLocal),
-    arrivalTimezone: arrivalTimezone,
-    arrivalTimeUtc: arrivalTimeUtc.let(DateTime.parse),
+    arrivalDateTime: DateTime.parse(arrivalTimeLocal),
     duration: Duration(minutes: durationMinutes),
     aircraft: aircraft,
   );

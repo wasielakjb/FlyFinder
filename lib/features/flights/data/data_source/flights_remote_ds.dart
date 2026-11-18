@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flyfinder/core/domain/model/json.dart';
 import 'package:flyfinder/core/http/di/di.dart';
 import 'package:flyfinder/features/flights/data/network/network_airport.dart';
-import 'package:flyfinder/features/flights/data/network/network_flight.dart';
+import 'package:flyfinder/features/flights/data/network/network_flight_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -25,15 +26,15 @@ class FlightsRemoteDataSource {
         );
   }
 
-  Future<NetworkFlight> oneWayFlightSearch(Json data) {
+  Future<NetworkFlightResponse> oneWayFlightSearch(Json data) async {
     return httpClient
         .post<Json>('/fares/one-way', data: data)
-        .then((res) => NetworkFlight.fromJson(res.data!));
+        .then((res) => NetworkFlightResponse.fromJson(res.data!));
   }
 
-  Future<NetworkFlight> roundTripFlightSearch(Json data) {
+  Future<NetworkFlightResponse> roundTripFlightSearch(Json data) {
     return httpClient
         .post<Json>('/fares/round-trip', data: data)
-        .then((res) => NetworkFlight.fromJson(res.data!));
+        .then((res) => NetworkFlightResponse.fromJson(res.data!));
   }
 }

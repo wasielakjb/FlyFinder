@@ -7,11 +7,11 @@ abstract interface class FlightsRepository {
     String query,
   );
 
-  Future<FlightResource> getOneWayFlights(
+  Future<List<FlightResource>> getOneWayFlights(
     covariant FormRequest data,
   );
 
-  Future<FlightResource> getRoundTripFlights(
+  Future<List<FlightResource>> getRoundTripFlights(
     covariant FormRequest data,
   );
 }
